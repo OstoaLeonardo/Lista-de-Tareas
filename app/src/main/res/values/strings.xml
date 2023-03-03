@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Lista de Tareas</string>
+    <string name="agregar_tarea">Agregar tarea</string>
+    <string name="editar_tarea">Editar tarea</string>
+    <string name="actualizar_tarea">Actualizar tarea</string>
+    <string name="completada_tarea">Tarea completada</string>
+    <string name="titulo_tarea">Titulo de la tarea</string>
+    <string name="descripcion_tarea">Descripcion de la tarea</string>
+    <string name="fecha_tarea">Fecha de tarea</string>
+    <string name="hora_tarea">Hora de tarea</string>
+    <string name="buscar">Buscar tarea</string>
+    <string name="tema">Elegir tema</string>
+    <string name="github">GitHub</string>
+</resources>
