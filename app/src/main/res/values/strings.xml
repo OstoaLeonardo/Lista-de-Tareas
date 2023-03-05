@@ -4,6 +4,7 @@
     <string name="editar_tarea">Editar tarea</string>
     <string name="actualizar_tarea">Actualizar tarea</string>
     <string name="completada_tarea">Tarea completada</string>
+    <string name="cancelar_edicion">Cancelar</string>
     <string name="titulo_tarea">Titulo de la tarea</string>
     <string name="descripcion_tarea">Descripcion de la tarea</string>
     <string name="fecha_tarea">Fecha de tarea</string>

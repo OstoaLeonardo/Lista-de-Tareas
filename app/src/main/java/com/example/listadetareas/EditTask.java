@@ -1,11 +1,15 @@
 package com.example.listadetareas;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,11 +17,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.listadetareas.db.DBTasks;
 import com.example.listadetareas.entities.Tasks;
 
+import java.util.Calendar;
+
 public class EditTask extends AppCompatActivity {
 
     private EditText etTitulo, etDescripcion, etFecha, etHora;
     private Button btnEditarGuardar;
     private TextView tvOpenTask, btnTareaCompletada;
+    private Calendar calendar;
+    private DatePickerDialog datePickerDialog;
+    private TimePickerDialog timePickerDialog;
     boolean correcto = false;
 
     Tasks task;
@@ -37,7 +46,45 @@ public class EditTask extends AppCompatActivity {
         tvOpenTask = findViewById(R.id.tvOpenTask);
 
         tvOpenTask.setText(R.string.editar_tarea);
-        btnEditarGuardar.setText(R.string.actualizar_tarea);
+        btnEditarGuardar.setText(R.string.cancelar_edicion);
+        btnTareaCompletada.setText(R.string.actualizar_tarea);
+
+        etFecha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calendar = Calendar.getInstance();
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+                int month = calendar.get(Calendar.MONTH);
+                int year = calendar.get(Calendar.YEAR);
+
+                datePickerDialog = new DatePickerDialog(EditTask.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                        etFecha.setText(day + "/" + (month + 1) + "/" + year);
+                    }
+                }, year, day, month);
+
+                datePickerDialog.show();
+            }
+        });
+
+        etHora.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calendar = Calendar.getInstance();
+                int hour = calendar.get(Calendar.HOUR_OF_DAY);
+                int minute = calendar.get(Calendar.MINUTE);
+
+                timePickerDialog = new TimePickerDialog(EditTask.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int hour, int minute) {
+                        etHora.setText(hour + ":" + minute);
+                    }
+                }, hour, minute, false);
+
+                timePickerDialog.show();
+            }
+        });
 
         if(savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
@@ -60,7 +107,7 @@ public class EditTask extends AppCompatActivity {
             etHora.setText(task.getHora());
         }
 
-        btnEditarGuardar.setOnClickListener(new View.OnClickListener() {
+        btnTareaCompletada.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(!etTitulo.getText().toString().isEmpty() || !etDescripcion.getText().toString().isEmpty() || !etFecha.getText().toString().isEmpty() || !etHora.getText().toString().isEmpty()) {
@@ -78,11 +125,13 @@ public class EditTask extends AppCompatActivity {
                 }
             }
         });
-    }
 
-    private void verTarea() {
-        Intent intent = new Intent(EditTask.this, OpenTask.class);
-        intent.putExtra("id", id);
-        startActivity(intent);
+        btnEditarGuardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EditTask.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

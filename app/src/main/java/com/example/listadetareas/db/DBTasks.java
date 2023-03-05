@@ -131,4 +131,31 @@ public class DBTasks extends DBHelper {
 
         return correcto;
     }
+
+    public ArrayList<Tasks> buscarTareas(String query) {
+        DBHelper dbHelper = new DBHelper(context);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        ArrayList<Tasks> listaTareas = new ArrayList<>();
+        Tasks tarea = null;
+        Cursor cursorTareas = null;
+
+        cursorTareas = db.rawQuery("SELECT * FROM " + TABLE_TASKS + " WHERE titulo LIKE '%" + query + "%' OR descripcion LIKE '%" + query + "%'  OR fecha LIKE '%" + query + "%' OR hora LIKE '%" + query + "%'", null);
+
+        if (cursorTareas.moveToFirst()) {
+            do {
+                tarea = new Tasks();
+                tarea.setId(cursorTareas.getInt(0));
+                tarea.setTitulo(cursorTareas.getString(1));
+                tarea.setDescripcion(cursorTareas.getString(2));
+                tarea.setFecha(cursorTareas.getString(3));
+                tarea.setHora(cursorTareas.getString(4));
+                listaTareas.add(tarea);
+            } while (cursorTareas.moveToNext());
+        }
+
+        cursorTareas.close();
+
+        return listaTareas;
+    }
 }

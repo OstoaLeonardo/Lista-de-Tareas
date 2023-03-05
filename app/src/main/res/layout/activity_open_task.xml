@@ -10,7 +10,7 @@
         android:id="@+id/tvOpenTask"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="30dp"
         android:fontFamily="@font/poppins_semibold"
         android:paddingHorizontal="30dp"
         android:text="@string/agregar_tarea"
@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
         app:cardCornerRadius="32dp"
         app:cardElevation="0dp"
@@ -97,7 +97,8 @@
                 android:inputType="date"
                 android:labelFor="@id/tvFecha"
                 android:textAlignment="textEnd"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:focusableInTouchMode="false" />
 
             <TextView
                 android:id="@+id/tvHora"
@@ -116,7 +117,8 @@
                 android:inputType="time"
                 android:labelFor="@id/tvHora"
                 android:textAlignment="textEnd"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:focusableInTouchMode="false" />
 
             <Button
                 android:id="@+id/btnEditarGuardar"

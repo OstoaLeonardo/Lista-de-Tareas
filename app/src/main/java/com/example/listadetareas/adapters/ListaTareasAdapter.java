@@ -41,6 +41,25 @@ public class ListaTareasAdapter extends RecyclerView.Adapter<ListaTareasAdapter.
         holder.tvDescripcionCard.setText(listaTareas.get(position).getDescripcion());
         holder.tvFechaCard.setText(listaTareas.get(position).getFecha());
         holder.tvHoraCard.setText(listaTareas.get(position).getHora());
+
+        holder.btnCompletada.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                builder.setMessage("¿Marcar como completada?");
+                builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        int id = listaTareas.get(position).getId();
+                        DBTasks dbTasks = new DBTasks(view.getContext());
+                        dbTasks.eliminarTarea(id);
+                        listaTareas.remove(position);
+                        notifyItemRemoved(position);
+                    }
+                });
+                builder.setNegativeButton("No", null).show();
+            }
+        });
     }
 
     @Override
@@ -52,6 +71,7 @@ public class ListaTareasAdapter extends RecyclerView.Adapter<ListaTareasAdapter.
 
         TextView tvTituloCard, tvDescripcionCard, tvFechaCard, tvHoraCard;
         Button btnCompletada;
+
         public TareasViewHolder(@NonNull View itemView) {
             super(itemView);
 

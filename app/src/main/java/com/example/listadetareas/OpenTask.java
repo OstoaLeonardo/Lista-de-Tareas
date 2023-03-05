@@ -51,9 +51,8 @@ public class OpenTask extends AppCompatActivity {
         DBTasks dbTasks = new DBTasks(OpenTask.this);
         task = dbTasks.abrirTarea(id);
 
-        tvOpenTask.setText(task.getTitulo());
-
         if(task != null) {
+            tvOpenTask.setText(task.getTitulo());
             etTitulo.setText(task.getTitulo());
             etDescripcion.setText(task.getDescripcion());
             etFecha.setText(task.getFecha());
@@ -78,7 +77,7 @@ public class OpenTask extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(OpenTask.this);
-                builder.setMessage("Marcar como completada").setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                builder.setMessage("¿Marcar como completada?").setPositiveButton("Si", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if(dbTasks.eliminarTarea(id)) {
@@ -86,12 +85,7 @@ public class OpenTask extends AppCompatActivity {
                             startActivity(intent);
                         }
                     }
-                }) .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                }).show();
+                }) .setNegativeButton("No", null).show();
             }
         });
     }

@@ -9,8 +9,11 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.listadetareas.adapters.ListaTareasAdapter;
@@ -22,7 +25,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btnAgregar;
+    private EditText etBuscar;
+    private Button btnAgregar, btnBuscar, btnCompletada;
     private RecyclerView rvTareas;
     private ArrayList<Tasks> listaArrayTareas;
 
@@ -31,14 +35,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        int currentTheme = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
-        if(currentTheme == Configuration.UI_MODE_NIGHT_YES) {
-            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.md_theme_dark_background));
-        } else {
-            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.md_theme_light_background));
-        }
-
         btnAgregar = findViewById(R.id.btnAgregar);
+        btnBuscar = findViewById(R.id.btnBuscar);
+        etBuscar = findViewById(R.id.etBuscar);
         rvTareas = findViewById(R.id.rvTareas);
         rvTareas.setLayoutManager(new LinearLayoutManager(this));
 
@@ -64,6 +63,40 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, AddTask.class);
                 startActivity(intent);
             }
+        });
+
+        btnBuscar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String query = etBuscar.getText().toString();
+
+                DBTasks dbTasks = new DBTasks(MainActivity.this);
+
+                listaArrayTareas = dbTasks.buscarTareas(query);
+
+                ListaTareasAdapter adapter = new ListaTareasAdapter(listaArrayTareas);
+                rvTareas.setAdapter(adapter);
+            }
+        });
+
+        etBuscar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String query = etBuscar.getText().toString();
+
+                DBTasks dbTasks = new DBTasks(MainActivity.this);
+
+                listaArrayTareas = dbTasks.buscarTareas(query);
+
+                ListaTareasAdapter adapter = new ListaTareasAdapter(listaArrayTareas);
+                rvTareas.setAdapter(adapter);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
         });
     }
 }
