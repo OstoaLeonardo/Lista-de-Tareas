@@ -22,13 +22,28 @@
         </activity>
         <activity
             android:name=".EditTask"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".OpenTask">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".OpenTask" />
+        </activity>
         <activity
             android:name=".OpenTask"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <activity
             android:name=".AddTask"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true">

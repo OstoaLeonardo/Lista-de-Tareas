@@ -19,7 +19,7 @@ import com.example.listadetareas.entities.Tasks;
 
 import java.util.Calendar;
 
-public class EditTask extends AppCompatActivity {
+public class EditTask extends MenuTopBar {
 
     private EditText etTitulo, etDescripcion, etFecha, etHora;
     private Button btnEditarGuardar;
@@ -36,6 +36,8 @@ public class EditTask extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_open_task);
+
+        setupToolbar();
 
         etTitulo = findViewById(R.id.etTitulo);
         etDescripcion = findViewById(R.id.etDescripcion);

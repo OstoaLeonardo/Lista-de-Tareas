@@ -10,6 +10,7 @@
     <string name="fecha_tarea">Fecha de tarea</string>
     <string name="hora_tarea">Hora de tarea</string>
     <string name="buscar">Buscar tarea</string>
-    <string name="tema">Elegir tema</string>
-    <string name="github">GitHub</string>
+    <string name="tema_claro_item_menu">Modo Claro</string>
+    <string name="tema_oscuro_item_menu">Modo Oscuro</string>
+    <string name="github_item_menu">Ir a GitHub</string>
 </resources>

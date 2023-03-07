@@ -23,7 +23,7 @@ import com.example.listadetareas.entities.Tasks;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends MenuTopBar {
 
     private EditText etBuscar;
     private Button btnAgregar, btnBuscar, btnCompletada;
@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        setupToolbarMain();
 
         btnAgregar = findViewById(R.id.btnAgregar);
         btnBuscar = findViewById(R.id.btnBuscar);

@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.example.listadetareas.db.DBTasks;
 import com.example.listadetareas.entities.Tasks;
 
-public class OpenTask extends AppCompatActivity {
+public class OpenTask extends MenuTopBar {
 
     private EditText etTitulo, etDescripcion, etFecha, etHora;
     private Button btnEditarGuardar, btnTareaCompletada;
@@ -28,6 +28,8 @@ public class OpenTask extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_open_task);
+
+        setupToolbar();
 
         etTitulo = findViewById(R.id.etTitulo);
         etDescripcion = findViewById(R.id.etDescripcion);
